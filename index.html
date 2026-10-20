@@ -1,574 +1,135 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#10101c">
-  <meta name="description" content="Sahar Mahmoud | Computer Science and Information Technology Portfolio">
-  <title>Sahar Mahmoud | Portfolio</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg: #10101c;
-      --panel: #191927;
-      --panel2: #202033;
-      --text: #f5f3ff;
-      --muted: #aaa8bf;
-      --accent: #c3a6ff;
-      --accent2: #8d77e8;
-      --border: rgba(195,166,255,.18);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-    a { color: inherit; text-decoration: none; }
-    button, input, textarea { font: inherit; }
-    .container { width: min(1120px, 90%); margin: auto; }
-    .accent { color: var(--accent); }
-    .section { padding: 100px 0; }
-    .section-heading { margin-bottom: 40px; }
-    .eyebrow {
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-    h2 {
-      font: 700 clamp(30px, 5vw, 44px)/1.2 'Playfair Display', serif;
-      margin-top: 10px;
-    }
-    .section-intro { color: var(--muted); margin-top: 12px; max-width: 650px; }
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(16,16,28,.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-    .logo { font-size: 22px; font-weight: 700; letter-spacing: 1px; }
-    .logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 22px; flex-wrap: wrap; }
-    .nav-links a { font-size: 13px; color: var(--muted); transition: .2s; }
-    .nav-links a:hover { color: var(--accent); }
-
-    .hero {
-      min-height: 82vh;
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      align-items: center;
-      gap: 60px;
-      padding-top: 65px;
-      padding-bottom: 65px;
-    }
-    .hero h1 {
-      font: 700 clamp(42px, 7vw, 76px)/1.08 'Playfair Display', serif;
-      margin: 18px 0;
-      letter-spacing: -1.5px;
-    }
-    .hero-copy { color: var(--muted); max-width: 550px; font-size: 16px; }
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 22px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 14px;
-      transition: transform .2s, background .2s;
-      border: 1px solid var(--border);
-    }
-    .btn:hover { transform: translateY(-3px); }
-    .btn-primary { background: var(--accent); color: #171323; border-color: var(--accent); }
-    .btn-secondary { background: transparent; }
-    .portrait-wrap { display: flex; justify-content: center; }
-    .portrait {
-      width: min(340px, 100%);
-      aspect-ratio: 4 / 5;
-      padding: 10px;
-      border: 1px solid rgba(195,166,255,.5);
-      border-radius: 170px 170px 24px 24px;
-      background: linear-gradient(145deg, #29223f, #171725);
-      box-shadow: 0 25px 80px rgba(0,0,0,.3);
-      overflow: hidden;
-    }
-    .portrait img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      border-radius: 160px 160px 17px 17px;
-    }
-
-    .about-grid, .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-    }
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 27px;
-    }
-    .card h3 { font-size: 19px; margin-bottom: 12px; }
-    .card p { color: var(--muted); }
-    .info-list { list-style: none; display: grid; gap: 13px; }
-    .info-list li { display: flex; justify-content: space-between; gap: 15px; }
-    .info-list span:first-child { color: var(--muted); }
-    .info-list span:last-child { text-align: right; font-weight: 600; }
-
-    .timeline { display: grid; gap: 18px; }
-    .timeline-item {
-      border-left: 2px solid var(--accent2);
-      padding: 5px 0 5px 22px;
-    }
-    .timeline-item .date { color: var(--accent); font-size: 13px; font-weight: 700; }
-    .timeline-item h3 { margin: 5px 0; }
-    .timeline-item p { color: var(--muted); }
-
-    .skills-grid, .projects-grid, .achievements-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-    .skill-card, .project-card, .achievement-card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      padding: 24px;
-      border-radius: 17px;
-      transition: transform .25s, border-color .25s;
-    }
-    .skill-card:hover, .project-card:hover, .achievement-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent);
-    }
-    .symbol {
-      width: 45px;
-      height: 45px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      background: rgba(195,166,255,.12);
-      color: var(--accent);
-      font-size: 22px;
-      margin-bottom: 17px;
-    }
-    .skill-card p, .project-card p, .achievement-card p {
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 8px;
-    }
-    .tag {
-      display: inline-block;
-      color: var(--accent);
-      background: rgba(195,166,255,.1);
-      border-radius: 7px;
-      padding: 4px 9px;
-      font-size: 11px;
-      margin-top: 14px;
-    }
-    .project-card { display: flex; flex-direction: column; align-items: flex-start; }
-    .project-card .tag { margin-top: auto; }
-    .achievement-card .symbol { font-size: 20px; }
-
-    .contact-note { margin-top: 14px; color: var(--muted); font-size: 13px; }
-    .contact-links { display: grid; gap: 14px; margin-top: 18px; }
-    .contact-link {
-      display: block;
-      background: var(--panel2);
-      border: 1px solid var(--border);
-      padding: 14px 16px;
-      border-radius: 10px;
-      transition: .2s;
-    }
-    .contact-link:hover { border-color: var(--accent); }
-    .contact-link small { display: block; color: var(--muted); }
-    .contact-link strong { overflow-wrap: anywhere; }
-    .contact-form { display: grid; gap: 13px; }
-    .contact-form input, .contact-form textarea {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 13px 15px;
-      border-radius: 9px;
-      outline: none;
-    }
-    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
-    .contact-form textarea { min-height: 130px; resize: vertical; }
-    .contact-form button { cursor: pointer; }
-    .form-message { color: var(--muted); font-size: 13px; }
-
-    footer { border-top: 1px solid var(--border); padding: 28px 0; color: var(--muted); }
-    .footer-inner { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
-    .back-top { color: var(--accent); }
-
-    .reveal { animation: appear .7s ease both; }
-    @keyframes appear {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 850px) {
-      .nav-inner { padding: 15px 0; align-items: flex-start; flex-direction: column; }
-      .nav-links { gap: 12px 17px; }
-      .hero { grid-template-columns: 1fr; gap: 38px; min-height: auto; text-align: center; }
-      .hero-copy { margin: auto; }
-      .hero-actions { justify-content: center; }
-      .portrait { width: min(300px, 85%); }
-      .skills-grid, .projects-grid, .achievements-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    }
-    @media (max-width: 560px) {
-      .section { padding: 72px 0; }
-      .about-grid, .contact-grid, .skills-grid, .projects-grid, .achievements-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 44px; }
-      .info-list li { flex-direction: column; gap: 0; }
-      .info-list span:last-child { text-align: left; }
-      .nav-links a { font-size: 12px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <header class="navbar">
-    <div class="container nav-inner">
-      <a class="logo" href="#home">S<span>.</span>M</a>
-      <nav class="nav-links" aria-label="Main navigation">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#education">Education</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#achievements">Achievements</a>
-        <a href="#contact">Contact</a>
-      </nav>
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="container">
+    <div class="section-heading">
+      <p class="eyebrow">What I can do</p>
+      <h2>My <span class="accent">Skills</span></h2>
+      <p class="section-intro">
+        Technical and personal skills I am developing through learning and practice.
+      </p>
     </div>
-  </header>
+    <div class="skills-grid">
+      <article class="skill-card">
+        <div class="symbol">&lt;/&gt;</div>
+        <h3>HTML</h3>
+        <p>Creating structured web pages with headings, links, images, and forms.</p>
+        <span class="tag">Web Development</span>
+      </article>
+      <article class="skill-card">
+        <div class="symbol">✧</div>
+        <h3>CSS</h3>
+        <p>Styling websites with colors, layouts, spacing, and responsive designs.</p>
+        <span class="tag">Web Design</span>
+      </article>
+      <article class="skill-card">
+        <div class="symbol">Py</div>
+        <h3>Python</h3>
+        <p>Practicing programming basics, variables, conditions, loops, and functions.</p>
+        <span class="tag">Programming</span>
+      </article>
+      <article class="skill-card">
+        <div class="symbol">C++</div>
+        <h3>C++ Basics</h3>
+        <p>Learning problem-solving, data types, conditions, loops, and functions.</p>
+        <span class="tag">Programming</span>
+      </article>
+      <article class="skill-card">
+        <div class="symbol">▤</div>
+        <h3>Database Fundamentals</h3>
+        <p>Understanding tables, records, relationships, and basic SQL concepts.</p>
+        <span class="tag">Databases</span>
+      </article>
+      <article class="skill-card">
+        <div class="symbol">♡</div>
+        <h3>Soft Skills</h3>
+        <p>Communication, teamwork, time management, and willingness to learn.</p>
+        <span class="tag">Personal Skills</span>
+      </article>
+    </div>
+  </div>
+</section>
 
-  <main>
-    <section class="container hero" id="home">
-      <div class="reveal">
-        <p class="eyebrow">Welcome to my portfolio</p>
-        <h1>Hello, I'm<br><span class="accent">Sahar Mahmoud.</span></h1>
-        <p class="hero-copy">
-          A Computer Science and Information Technology student passionate
-          about technology, creative problem-solving, and continuous learning.
-          Welcome to my personal portfolio.
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="section-heading">
+      <p class="eyebrow">Practice and creativity</p>
+      <h2>My <span class="accent">Projects</span></h2>
+      <p class="section-intro">
+        Simple project ideas that demonstrate programming and web development fundamentals.
+      </p>
+    </div>
+    <div class="projects-grid">
+      <article class="project-card">
+        <div class="symbol">01</div>
+        <h3>Personal Portfolio Website</h3>
+        <p>
+          A responsive personal website introducing my background, education,
+          skills, and interests using HTML and CSS.
         </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#projects">Explore My Work ↗</a>
-          <a class="btn btn-secondary" href="#contact">Get In Touch</a>
-        </div>
-      </div>
-
-      <div class="portrait-wrap reveal">
-        <div class="portrait">
-          <img src="sahar-graduation.jpeg" alt="Sahar Mahmoud graduation portrait">
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="about">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Get to know me</p>
-          <h2>About <span class="accent">Me</span></h2>
-          <p class="section-intro">
-            An introduction to my academic journey, interests, and goals.
-          </p>
-        </div>
-        <div class="about-grid">
-          <article class="card">
-            <h3>A Little About Me</h3>
-            <p>
-              I'm Sahar Mahmoud, studying in the Faculty of Computers and
-              Information. I'm interested in exploring software, understanding
-              how technology works, and developing skills through practice.
-              I believe in learning step by step and turning ideas into useful
-              digital experiences.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Quick Information</h3>
-            <ul class="info-list">
-              <li><span>Name</span><span>Sahar Mahmoud</span></li>
-              <li><span>Field</span><span>Computer Science & IT</span></li>
-              <li><span>Interests</span><span>Technology & Software</span></li>
-              <li><span>Current Focus</span><span>Learning & Projects</span></li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="education">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">My academic path</p>
-          <h2>Education & <span class="accent">Learning</span></h2>
-        </div>
-        <div class="card timeline">
-          <div class="timeline-item">
-            <span class="date">University Education</span>
-            <h3>Faculty of Computers and Information</h3>
-            <p>
-              Academic study in computing and information technology.
-              Add your university name, department, and study dates here.
-            </p>
-          </div>
-          <div class="timeline-item">
-            <span class="date">Continuous Learning</span>
-            <h3>Technical Skills Development</h3>
-            <p>
-              Building knowledge through practice, coursework, and personal
-              learning projects.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="skills">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">What I'm developing</p>
-          <h2>My <span class="accent">Skills</span></h2>
-          <p class="section-intro">
-            These are skill areas to personalize based on the technologies
-            and tools I have actually studied and practiced.
-          </p>
-        </div>
-        <div class="skills-grid">
-          <article class="skill-card">
-            <div class="symbol">&lt;/&gt;</div>
-            <h3>Programming</h3>
-            <p>Add your programming languages and current level of experience.</p>
-            <span class="tag">Personalize this</span>
-          </article>
-          <article class="skill-card">
-            <div class="symbol">⌘</div>
-            <h3>Web Development</h3>
-            <p>Add the web technologies you have learned, such as HTML and CSS.</p>
-            <span class="tag">Personalize this</span>
-          </article>
-          <article class="skill-card">
-            <div class="symbol">▤</div>
-            <h3>Databases</h3>
-            <p>List database systems and concepts you have studied.</p>
-            <span class="tag">Personalize this</span>
-          </article>
-          <article class="skill-card">
-            <div class="symbol">◇</div>
-            <h3>Problem Solving</h3>
-            <p>Show examples of analytical thinking and technical challenges.</p>
-            <span class="tag">Developing</span>
-          </article>
-          <article class="skill-card">
-            <div class="symbol">✧</div>
-            <h3>Creative Thinking</h3>
-            <p>Approaching ideas with curiosity and a willingness to experiment.</p>
-            <span class="tag">Personal strength</span>
-          </article>
-          <article class="skill-card">
-            <div class="symbol">↗</div>
-            <h3>Continuous Learning</h3>
-            <p>Growing through practice, feedback, and new learning experiences.</p>
-            <span class="tag">Ongoing</span>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="projects">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Things I've worked on</p>
-          <h2>Featured <span class="accent">Projects</span></h2>
-          <p class="section-intro">
-            Replace these sample cards with your actual projects, descriptions,
-            and repository links when they're ready.
-          </p>
-        </div>
-        <div class="projects-grid">
-          <article class="project-card">
-            <div class="symbol">01</div>
-            <h3>Personal Portfolio</h3>
-            <p>
-              A personal website introducing my background, learning journey,
-              skills, and work.
-            </p>
-            <span class="tag">HTML · CSS</span>
-          </article>
-          <article class="project-card">
-            <div class="symbol">02</div>
-            <h3>Academic Project</h3>
-            <p>
-              Add the title, purpose, tools, and outcome of a university
-              project you completed.
-            </p>
-            <span class="tag">Add project details</span>
-          </article>
-          <article class="project-card">
-            <div class="symbol">03</div>
-            <h3>Future Project</h3>
-            <p>
-              Showcase a project you are currently planning or developing,
-              once you have real details to share.
-            </p>
-            <span class="tag">In progress</span>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="achievements">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Milestones & growth</p>
-          <h2>Achievements & <span class="accent">Certificates</span></h2>
-          <p class="section-intro">
-            Add verified achievements, completed courses, awards, and
-            certificates here. No certificate or award is assumed.
-          </p>
-        </div>
-        <div class="achievements-grid">
-          <article class="achievement-card">
-            <div class="symbol">✦</div>
-            <h3>Academic Milestone</h3>
-            <p>Add an academic achievement and the year it was earned.</p>
-            <span class="tag">Add details</span>
-          </article>
-          <article class="achievement-card">
-            <div class="symbol">▣</div>
-            <h3>Course Certificate</h3>
-            <p>Add a completed course, training provider, and completion date.</p>
-            <span class="tag">Add details</span>
-          </article>
-          <article class="achievement-card">
-            <div class="symbol">↗</div>
-            <h3>Personal Growth</h3>
-            <p>Highlight a real project, challenge, or technical milestone.</p>
-            <span class="tag">Add details</span>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Let's connect</p>
-          <h2>Contact <span class="accent">Me</span></h2>
-          <p class="section-intro">
-            Interested in collaborating, sharing ideas, or discussing a project?
-            Use the contact details once they have been added below.
-          </p>
-        </div>
-
-        <div class="contact-grid">
-          <article class="card">
-            <h3>Contact Information</h3>
-            <p>Replace the placeholders with your real public contact details.</p>
-            <div class="contact-links">
-              <div class="contact-link">
-                <small>Email</small>
-                <strong>Add your email address</strong>
-              </div>
-              <div class="contact-link">
-                <small>LinkedIn</small>
-                <strong>Add your LinkedIn profile</strong>
-              </div>
-              <div class="contact-link">
-                <small>GitHub</small>
-                <strong>Add your GitHub profile</strong>
-              </div>
-            </div>
-            <p class="contact-note">
-              Don't publish private information you don't want visible online.
-            </p>
-          </article>
-
-          <article class="card">
-            <h3>Send a Message</h3>
-            <form class="contact-form" id="contactForm">
-              <input id="senderName" type="text" placeholder="Your name" required>
-              <input id="senderEmail" type="email" placeholder="Your email" required>
-              <textarea id="senderMessage" placeholder="Write your message..." required></textarea>
-              <button class="btn btn-primary" type="submit">Prepare Email ↗</button>
-              <p class="form-message" id="formMessage">
-                This form opens your email app; it does not send messages to a server.
-              </p>
-            </form>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> Sahar Mahmoud. All rights reserved.</p>
-      <a class="back-top" href="#home">Back to top ↑</a>
+        <span class="tag">HTML · CSS</span>
+      </article>
+      <article class="project-card">
+        <div class="symbol">02</div>
+        <h3>Simple Online Store Design</h3>
+        <p>
+          A practice storefront layout displaying products, prices, and product
+          categories in a clear and organized interface.
+        </p>
+        <span class="tag">HTML · CSS</span>
+      </article>
+      <article class="project-card">
+        <div class="symbol">03</div>
+        <h3>Task Management Program</h3>
+        <p>
+          A beginner programming project for organizing a list of tasks and
+          practicing basic input, conditions, loops, and data handling.
+        </p>
+        <span class="tag">Python · Programming Basics</span>
+      </article>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    document.getElementById('contactForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      const name = document.getElementById('senderName').value.trim();
-      const email = document.getElementById('senderEmail').value.trim();
-      const message = document.getElementById('senderMessage').value.trim();
-
-      // Replace this address with Sahar's real email before using the form.
-      const recipient = 'YOUR_EMAIL@example.com';
-
-      if (recipient === 'YOUR_EMAIL@example.com') {
-        document.getElementById('formMessage').textContent =
-          'The form is ready. Add Sahar’s real email address in the code to activate it.';
-        return;
-      }
-
-      const subject = encodeURIComponent('Portfolio message from ' + name);
-      const body = encodeURIComponent(
-        'Name: ' + name + '\nEmail: ' + email + '\n\n' + message
-      );
-
-      window.location.href =
-        'mailto:' + recipient + '?subject=' + subject + '&body=' + body;
-    });
-  </script>
-</body>
-</html>
+<!-- ACHIEVEMENTS -->
+<section class="section" id="achievements">
+  <div class="container">
+    <div class="section-heading">
+      <p class="eyebrow">Learning milestones</p>
+      <h2>Achievements & <span class="accent">Growth</span></h2>
+      <p class="section-intro">
+        Small milestones that reflect my learning journey and growing interest in technology.
+      </p>
+    </div>
+    <div class="achievements-grid">
+      <article class="achievement-card">
+        <div class="symbol">✦</div>
+        <h3>Personal Portfolio</h3>
+        <p>
+          Developing a personal portfolio to present my education, interests,
+          and technical skills in one place.
+        </p>
+        <span class="tag">Web Development Practice</span>
+      </article>
+      <article class="achievement-card">
+        <div class="symbol">&lt;/&gt;</div>
+        <h3>Programming Practice</h3>
+        <p>
+          Practicing beginner programming exercises to strengthen logical
+          thinking and problem-solving skills.
+        </p>
+        <span class="tag">Continuous Learning</span>
+      </article>
+      <article class="achievement-card">
+        <div class="symbol">↗</div>
+        <h3>Technical Growth</h3>
+        <p>
+          Exploring web design, programming concepts, and database fundamentals
+          through learning and practice.
+        </p>
+        <span class="tag">Skill Development</span>
+      </article>
+    </div>
+  </div>
+</section>
